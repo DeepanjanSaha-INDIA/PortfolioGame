@@ -3,9 +3,9 @@
     <div class="row bg-dark">
             <div class="col-2" *ngFor="let comp of companyDetails">
                 <span class="text-white"> {{comp.name}} </span>
-                <button type="button" class="btn btn-dark" style="padding:0px 1px;"> + </button>
+                <button type="button" class="btn btn-dark" style="padding:0px 1px;" (click)="add(comp)"> + </button>
                 <span class="text-white"> {{comp.quantity}} </span>
-                <button type="button" class="btn btn-dark" style="padding:0px 1px;"> - </button>
+                <button type="button" class="btn btn-dark" style="padding:0px 1px;" (click)="remove(comp)"> - </button>
                 <span class="text-white float-right" style="margin: 0px 5px;" *ngFor="let chance of comp.chance;"> 
                     {{diceMap[chance]}} </span>
             </div>
