@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MainService } from 'src/app/service/main.service';
 import { Observable } from 'rxjs';
+import { Data } from 'src/app/model/data';
 
 @Component({
   selector: 'app-header',
@@ -9,16 +10,15 @@ import { Observable } from 'rxjs';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor( private service: MainService ) { }
-  private year: number;
-  private cash: number;
+  constructor( private service: MainService ) {
+  }
+  private data: Data;
 
   clicked() {
-    this.year = this.service.sendClick();
+    this.service.yearUpdate();
   }
 
   ngOnInit() {
-    this.service.getYear().subscribe((year) => {this.year = year});
-    this.service.getCash().subscribe((cash) => {this.cash = cash});
+    this.service.dataObservable.subscribe((data) => {this.data = data;});
   }
 }

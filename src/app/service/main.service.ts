@@ -1,42 +1,51 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { of, Observable } from 'rxjs';
+import { of, Observable, BehaviorSubject } from 'rxjs';
+import { Data } from '../model/data';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MainService {
 
-  private year: number = 0;
-  private cash: number = 500;
-  private companyDetails = [{name: 'A', chance: [0], quantity: 0, stockIndex: 9}, 
-                            {name: 'B', chance: [0], quantity: 0, stockIndex: 9},
-                            {name: 'C', chance: [0, 0], quantity: 0, stockIndex: 9}, 
-                            {name: 'D', chance: [0, 0], quantity: 0, stockIndex: 9}, 
-                            {name: 'E', chance: [0, 0, 0], quantity: 0, stockIndex: 9}, 
-                            {name: 'F', chance: [0, 0, 0], quantity: 0, stockIndex: 9}];
-  public cashUpdate: EventEmitter<any> = new EventEmitter<any>();
+  private data : Data = new Data();
+  private dataBehaviourSubject = new BehaviorSubject<Data>(this.data);
+  dataObservable = this.dataBehaviourSubject.asObservable();
+  
+  // public cashUpdate: EventEmitter<any> = new EventEmitter<any>();
 
   constructor() { }
 
-  sendCompanyDetails() {
-    return this.companyDetails;
+  // sendCompanyDetails() {
+  //   return this.companyDetails;
+  // }
+
+  yearUpdate() {
+    this.data.year += 1;
+    this.data.companyDetails[0].chance[0] = this.data.response["random"][this.data.year][0];
+    this.data.companyDetails[1].chance[0] = this.data.response["random"][this.data.year][1];
+    this.data.companyDetails[2].chance[0] = this.data.response["random"][this.data.year][2];
+    this.data.companyDetails[2].chance[1] = this.data.response["random"][this.data.year][3];
+    this.data.companyDetails[3].chance[0] = this.data.response["random"][this.data.year][4];
+    this.data.companyDetails[3].chance[1] = this.data.response["random"][this.data.year][5];
+    this.data.companyDetails[4].chance[0] = this.data.response["random"][this.data.year][6];
+    this.data.companyDetails[4].chance[1] = this.data.response["random"][this.data.year][7];
+    this.data.companyDetails[4].chance[2] = this.data.response["random"][this.data.year][8];
+    this.data.companyDetails[5].chance[0] = this.data.response["random"][this.data.year][9];
+    this.data.companyDetails[5].chance[1] = this.data.response["random"][this.data.year][10];
+    this.data.companyDetails[5].chance[2] = this.data.response["random"][this.data.year][11];
+    this.dataBehaviourSubject.next(this.data);
   }
 
-  sendClick(): number {
-    this.year += 1;
-    return this.year;
+  update(newData: Data) {
+    this.dataBehaviourSubject.next(newData);
   }
 
-  getYear(): Observable<number> {
-    return of(this.year);
-  }
+  // getCash(): Observable<number> {
+  //   return of(this.cash);
+  // }
 
-  getCash(): Observable<number> {
-    return of(this.cash);
-  }
-
-  setCash(cash: number){
-    this.cash = cash;
-    this.cashUpdate.emit(this.cash);
-  }
+  // setCash(cash: number){
+  //   this.cash = cash;
+  //   this.cashUpdate.emit(this.cash);
+  // }
 }

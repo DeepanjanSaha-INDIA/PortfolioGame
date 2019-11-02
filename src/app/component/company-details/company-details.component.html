@@ -1,7 +1,7 @@
 <hr />
 <div class="container-fluid">
     <div class="row bg-dark">
-            <div class="col-2" *ngFor="let comp of companyDetails">
+            <div class="col-2" *ngFor="let comp of data.companyDetails">
                 <span class="text-white"> {{comp.name}} </span>
                 <button type="button" class="btn btn-dark" style="padding:0px 1px;" (click)="add(comp)"> + </button>
                 <span class="text-white"> {{comp.quantity}} </span>
@@ -13,9 +13,9 @@
     <div class="row">
         <div class="col-2 bg-secondary">
             <table>
-                <tr *ngFor="let stock of stockList">
+                <tr *ngFor="let stock of data.stockList">
                     <td>{{stock}}</td>
-                    <td *ngFor="let year of years">
+                    <td *ngFor="let year of data.years">
                         <input name="{{stock}}{{year}}" type="radio" 
                         id="A{{stock}}{{year}}" disabled />
                     </td>
@@ -24,9 +24,9 @@
         </div>
         <div class="col-2 bg-info">
             <table>
-                <tr *ngFor="let stock of stockList">
+                <tr *ngFor="let stock of data.stockList">
                     <td>{{stock}}</td>
-                    <td *ngFor="let year of years">
+                    <td *ngFor="let year of data.years">
                         <input name="{{stock}}{{year}}" type="radio" 
                         id="B{{stock}}{{year}}" disabled />
                     </td>
@@ -35,9 +35,9 @@
         </div>
         <div class="col-2 bg-primary">
             <table>
-                <tr *ngFor="let stock of stockList">
+                <tr *ngFor="let stock of data.stockList">
                     <td>{{stock}}</td>
-                    <td *ngFor="let year of years">
+                    <td *ngFor="let year of data.years">
                         <input name="{{stock}}{{year}}" type="radio" 
                         id="C{{stock}}{{year}}" disabled />
                     </td>
@@ -46,9 +46,9 @@
         </div>
         <div class="col-2 bg-success">
             <table>
-                <tr *ngFor="let stock of stockList">
+                <tr *ngFor="let stock of data.stockList">
                     <td>{{stock}}</td>
-                    <td *ngFor="let year of years">
+                    <td *ngFor="let year of data.years">
                         <input name="{{stock}}{{year}}" type="radio" 
                         id="D{{stock}}{{year}}" disabled />
                     </td>
@@ -57,9 +57,9 @@
         </div>
         <div class="col-2 bg-warning">
             <table>
-                <tr *ngFor="let stock of stockList">
+                <tr *ngFor="let stock of data.stockList">
                     <td>{{stock}}</td>
-                    <td *ngFor="let year of years">
+                    <td *ngFor="let year of data.years">
                         <input name="{{stock}}{{year}}" type="radio" 
                         id="E{{stock}}{{year}}" disabled />
                     </td>
@@ -68,9 +68,9 @@
         </div>
         <div class="col-2 bg-danger">
             <table>
-                <tr *ngFor="let stock of stockList">
+                <tr *ngFor="let stock of data.stockList">
                     <td>{{stock}}</td>
-                    <td *ngFor="let year of years">
+                    <td *ngFor="let year of data.years">
                         <input name="{{stock}}{{year}}" type="radio" 
                         id="F{{stock}}{{year}}" disabled />
                     </td>
