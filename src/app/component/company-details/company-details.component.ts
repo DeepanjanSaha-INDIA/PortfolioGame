@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { MainService } from 'src/app/service/main.service';
 import { Data } from 'src/app/model/data';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-company-details',
@@ -9,7 +10,8 @@ import { Data } from 'src/app/model/data';
 })
 export class CompanyDetailsComponent implements OnInit {
 
-  constructor(private service: MainService) { }
+  constructor(private service: MainService) { 
+  }
 
   private data: Data;
   private diceMap = {1: '--', 2: 'up', 3: 'dn', 4: '--', 5: 'up', 6: 'dn', 7: '--', 8: 'up' };
@@ -35,7 +37,9 @@ export class CompanyDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.service.dataObservable.subscribe((data) => {this.data = data;});
+    this.service.dataObservable.subscribe((data) => {
+      this.data = data;
+    });
   }
 
 }

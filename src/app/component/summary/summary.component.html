@@ -7,12 +7,12 @@
             <div class="text-white"> Stocks </div>
             <div class="text-white"> Total </div>
         </div>
-        <div class="col-1" *ngFor="let year of years">
-            <div class="text-white" id="Year{{year}}"> 0 </div>
-            <div class="text-white" id="Cash{{year}}"> 0 </div>
-            <div class="text-white" id="Interest{{year}}"> 0 </div>
-            <div class="text-white" id="Stocks{{year}}"> 0 </div>
-            <div class="text-white" id="Total{{year}}"> 0 </div>
+        <div class="col-1" *ngFor="let statistics of data.yearStats">
+            <div class="text-white"> {{statistics.year}} </div>
+            <div class="text-white"> {{statistics.cash}} </div>
+            <div class="text-white"> {{statistics.interest}} </div>
+            <div class="text-white"> {{statistics.stocks}} </div>
+            <div class="text-white"> {{statistics.total}} </div>
         </div>
     </div>
 </div>

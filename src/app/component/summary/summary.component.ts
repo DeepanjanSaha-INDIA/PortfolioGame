@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Data } from 'src/app/model/data';
+import { MainService } from 'src/app/service/main.service';
 
 @Component({
   selector: 'app-summary',
@@ -7,14 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SummaryComponent implements OnInit {
 
-  constructor() { }
+  private data: Data;
+  private year: number;
 
-  private years = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-  display() {
-    console.log(this.years);
-  }
+  constructor(private service: MainService) { }
+
   ngOnInit() {
-    this.display();
+    this.service.dataObservable.subscribe((data) => {
+      this.data = data;
+      this.year = data.year;
+    });
   }
-
 }
