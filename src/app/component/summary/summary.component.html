@@ -8,11 +8,11 @@
             <div class="text-white"> Total </div>
         </div>
         <div class="col-1" *ngFor="let statistics of data.yearStats">
-            <div class="text-white"> {{statistics.year}} </div>
-            <div class="text-white"> {{statistics.cash}} </div>
-            <div class="text-white"> {{statistics.interest}} </div>
-            <div class="text-white"> {{statistics.stocks}} </div>
-            <div class="text-white"> {{statistics.total}} </div>
+            <div class="text-white"> {{statistics.year | number: '1.1-2' }} </div>
+            <div class="text-white"> {{statistics.cash | number: '1.1-2' }} </div>
+            <div class="text-white"> {{statistics.interest | number: '1.1-2' }} </div>
+            <div class="text-white"> {{statistics.stocks | number: '1.1-2' }} </div>
+            <div class="text-white"> {{statistics.total | number: '1.1-2' }} </div>
         </div>
     </div>
 </div>

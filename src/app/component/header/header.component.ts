@@ -15,6 +15,8 @@ export class HeaderComponent implements OnInit {
   private data: Data;
 
   clicked() {
+    if(this.data.year >= 10)
+      return;
     this.service.yearUpdate();
   }
 

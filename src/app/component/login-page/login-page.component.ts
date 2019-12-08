@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MainService } from 'src/app/service/main.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login-page',
@@ -20,6 +21,7 @@ export class LoginPageComponent implements OnInit {
     
   }
   ngOnInit() {
+    document.body.classList.add('bg-image');
   }
 
 }

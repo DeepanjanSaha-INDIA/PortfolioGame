@@ -38,16 +38,28 @@ export class MainService {
     let iterativeList = [[0, 0], [1, 0], [2, 0], [2, 1], [3, 0], [3, 1],
                  [4, 0], [4, 1], [4, 2], [5, 0], [5, 1], [5, 2]];
     let randomVal = 0;
+    // 12 iterations
     for (let index in iterativeList){
       randomVal = this.data.response["random"][this.data.year-1][index];
+      // Shows 'up' and 'dn' in 'company-details.component.html'
       this.data.companyDetails[iterativeList[index][0]].chance[iterativeList[index][1]] = randomVal;
+      // Go down condition
       if ([3, 6].includes(randomVal)){
         this.data.companyDetails[iterativeList[index][0]].stockIndex += 1;
       }
+      // Go up condition
       else if ([2, 5, 8].includes(randomVal)){
         this.data.companyDetails[iterativeList[index][0]].stockIndex -= 1;
       }
     }
+    for (let index = 0; index < 6; index++){
+      if(this.data.companyDetails[index]["stockIndex"] < 3){
+        this.data.companyDetails[index]["stockIndex"] += 6;
+        this.data.companyDetails[index]["quantity"] *= 4;
+      }
+      this.data.yearStats[this.data.year]["stockIndex"][index] = this.data.companyDetails[index]["stockIndex"];
+    }
+    console.log(this.data.yearStats);
   }
 
   updateStats() {
@@ -69,11 +81,12 @@ export class MainService {
         interest += 0.1*stocksQuantity*stocksValue;
       }
     }
-      this.data.yearStats[this.data.year].interest = interest;
-      this.data.yearStats[this.data.year].stocks = stocks;
-      this.data.yearStats[this.data.year].total = this.data.cash + interest + stocks;
-      this.data.cash += interest;
+    this.data.yearStats[this.data.year].interest = interest;
+    this.data.yearStats[this.data.year].stocks = stocks;
+    this.data.yearStats[this.data.year].total = this.data.cash + interest + stocks;
+    this.data.cash += interest;
   }
+
   update(newData: Data) {
     this.dataBehaviourSubject.next(newData);
   }
