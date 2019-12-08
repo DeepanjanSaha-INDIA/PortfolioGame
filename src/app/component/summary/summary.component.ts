@@ -15,6 +15,7 @@ export class SummaryComponent implements OnInit {
   constructor(private service: MainService) { }
 
   ngOnInit() {
+    // Subscribing to Behaviour subject
     this.service.dataObservable.subscribe((data) => {
       this.data = data;
       this.year = data.year;

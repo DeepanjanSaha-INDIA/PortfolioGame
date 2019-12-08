@@ -1,9 +1,16 @@
 export class Data {
+    // Year and cash displayed in HeaderComponent
     public year: number;
     public cash: number;
+
+    // Contains data used in CompanyDetailsComponent
     public companyDetails: object;
     public stockList: object;
+
+    // Contains data used in SummaryComponent
     public yearStats: object;
+
+    // Stores the response from the AWS API
     public response: object;
 
     constructor() {

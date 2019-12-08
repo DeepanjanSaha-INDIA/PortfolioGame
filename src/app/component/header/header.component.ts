@@ -14,6 +14,7 @@ export class HeaderComponent implements OnInit {
   }
   private data: Data;
 
+  // Calls yearUpdate() from MainService, if year < 10.
   clicked() {
     if(this.data.year >= 10)
       return;
@@ -21,6 +22,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
+    // Subscribing to Behaviour subject
     this.service.dataObservable.subscribe((data) => {this.data = data;});
   }
 }

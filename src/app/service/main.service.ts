@@ -9,14 +9,18 @@ import { Router } from '@angular/router';
 })
 export class MainService {
 
+  // Creates an instance of Data model and implements behaviour subject
   private data : Data = new Data();
   private dataBehaviourSubject = new BehaviorSubject<Data>(this.data);
   dataObservable = this.dataBehaviourSubject.asObservable();
+
+  // API endpoint and it's response stored in "response" 
   private response: object;
   private url = "https://32bs83hc91.execute-api.ap-south-1.amazonaws.com/generateRandomNumber/host/?key=";
 
   constructor(private http: HttpClient, private router: Router) { }
 
+  // Updates year, stocks in CompanyDetailsComponent and stats in SummaryComponent
   yearUpdate() {
     this.data.year += 1;
     this.updateStocks();
@@ -24,6 +28,7 @@ export class MainService {
     this.dataBehaviourSubject.next(this.data);
   }
 
+  // Fetches response from API and stores it. Also navigates to game page.
   sendKey(key: number){
     console.log(this.url+key);
     this.http.get(this.url + key).subscribe((data) => {
@@ -34,6 +39,7 @@ export class MainService {
     });
   }
 
+  // Updates stocks of company, using the response and also covers overflow condition.
   updateStocks(){
     let iterativeList = [[0, 0], [1, 0], [2, 0], [2, 1], [3, 0], [3, 1],
                  [4, 0], [4, 1], [4, 2], [5, 0], [5, 1], [5, 2]];
@@ -62,6 +68,7 @@ export class MainService {
     console.log(this.data.yearStats);
   }
 
+  // Calculates the yearwise statistics from updated company details to be displayed in SummaryComponent
   updateStats() {
     let interest = 0;
     let stocks = 0;
@@ -69,24 +76,28 @@ export class MainService {
     let stocksQuantity = 0;
 
     this.data.yearStats[this.data.year].cash = this.data.cash;
-    console.log(this.data.companyDetails[0].stockIndex);
+    // console.log(this.data.companyDetails[0].stockIndex);
     for (let ind in this.data.companyDetails){
       stocksQuantity = this.data.companyDetails[ind].quantity;
       stocksValue = this.data.stockList[this.data.companyDetails[ind].stockIndex];
       stocks += stocksQuantity*stocksValue;
+      // Interest for Company 'A' and 'B' are 20% of stock value.
       if ((this.data.companyDetails[ind].name == 'A')||(this.data.companyDetails[ind].name == 'B')){
         interest += 0.2*stocksQuantity*stocksValue;
       }
+      // Interest for Company 'C' and 'D' are 10% of stock value.
       if ((this.data.companyDetails[ind].name == 'C')||(this.data.companyDetails[ind].name == 'D')){
         interest += 0.1*stocksQuantity*stocksValue;
       }
     }
+    // Updating Interest, Stock value, Total value and Cash
     this.data.yearStats[this.data.year].interest = interest;
     this.data.yearStats[this.data.year].stocks = stocks;
     this.data.yearStats[this.data.year].total = this.data.cash + interest + stocks;
     this.data.cash += interest;
   }
 
+  // Function used to update Data model instance from component.
   update(newData: Data) {
     this.dataBehaviourSubject.next(newData);
   }
